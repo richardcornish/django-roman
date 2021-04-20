@@ -15,7 +15,7 @@ setup(
     zip_safe=False,
     include_package_data=True,
     packages=find_packages(exclude=('tests',)),
-    test_suite='smarty.tests',
+    test_suite='roman.tests',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
