@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 
 setup(
-    name='django-roman',
+    name='roman',
     version='0.1',
     description='A Django template filter to convert Arabic numerals to Roman numerals',
     long_description=open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'README.rst')).read(),
