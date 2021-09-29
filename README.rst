@@ -49,7 +49,7 @@ Or as a template filter.
 
 .. code-block:: django
 
-   {{ post.body|roman }}
+   {{ post.body|to_roman }}
 
 Result:
 
