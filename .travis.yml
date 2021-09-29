@@ -4,10 +4,17 @@ python:
     - "3.8"
     - "3.7"
     - "3.6"
+    - "3.5"
 env:
     - DJANGO_VERSION=3.2.7
     - DJANGO_VERSION=3.1.13
     - DJANGO_VERSION=2.2.24
+matrix:
+    exclude:
+        - python: "3.5"
+          env: DJANGO_VERSION=3.2.7
+        - python: "3.5"
+          env: DJANGO_VERSION=3.1.13
 before_install:
     - export DJANGO_SETTINGS_MODULE="roman.tests.settings"
 install:
