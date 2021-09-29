@@ -12,53 +12,26 @@ Load the template tags.
 Filter
 ======
 
-Use the ``to_roman`` template filter to convert from Arabic to Roman numerals.
+Convert Arabic numerals to Roman numerals with the ``roman`` template filter.
 
 .. code-block:: django
 
-   {{ post.body|to_roman }}
+   {{ "Party like it's 1999."|roman }}
 
 Result:
 
 .. code-block:: html
 
-   Party like it's MCMXCIX.
+   Party like it's <span class="numerals numerals-roman">MCMXCIX</span>.
 
-Or use the ``from_roman`` template filter to convert from Roman to Arabic numerals.
+Convert Roman numerals to Arabic numerals with the ``arabic`` template filter.
 
 .. code-block:: django
 
-   {{ post.body|from_roman }}
+   {{ "Where did the princes go, Richard III of England?"|arabic }}
 
 Result:
 
 .. code-block:: html
 
-   Party like it's 1999.
-
-Tag
-===
-
-Use the ``{% to_roman %}`` template tag to convert from Arabic to Roman numerals.
-
-.. code-block:: django
-
-   {% to_roman %}1999{% endto_roman %}
-
-Result:
-
-.. code-block:: html
-
-   MCMXCIX
-
-Or use the ``{% from_roman %}`` template tag to convert from Roman to Arabic numerals.
-
-.. code-block:: django
-
-   {% from_roman %}MCMXCIX{% endfrom_roman %}
-
-Result:
-
-.. code-block:: html
-
-   1999
+   Where did the princes go, Richard <span class="numerals numerals-arabic">3</span> of England?

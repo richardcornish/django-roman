@@ -37,22 +37,16 @@ Add to ``settings.py``.
 Usage
 =====
 
-Use as a template tag.
+Convert Arabic numerals to Roman numerals with the ``roman`` template filter.
 
 .. code-block:: django
 
    {% load roman_tags %}
 
-   {% to_roman %}Party like it's 1999.{% endto_roman %}
-
-Or as a template filter.
-
-.. code-block:: django
-
-   {{ post.body|to_roman }}
+   {{ "Party like it's 1999."|roman }}
 
 Result:
 
 .. code-block:: html
 
-   Party like it's MCMXCIX.
+   Party like it's <span class="numerals numerals-roman">MCMXCIX</span>.

@@ -11,18 +11,6 @@ https://github.com/kennethreitz/dive-into-python3/blob/master/examples/roman7.py
 import re
 
 
-class OutOfRangeError(ValueError):
-    pass
-
-
-class NotIntegerError(ValueError):
-    pass
-
-
-class InvalidRomanNumeralError(ValueError):
-    pass
-
-
 roman_numeral_map = (
     ("M", 1000),
     ("CM", 900),
@@ -39,9 +27,10 @@ roman_numeral_map = (
     ("I", 1),
 )
 
-roman_numeral_pattern = re.compile(
+arabic_pattern = re.compile(r"(\d+)")
+
+roman_pattern = re.compile(
     """
-    ^                   # beginning of string
     M{0,3}              # thousands - 0 to 3 M's
     (CM|CD|D?C{0,3})    # hundreds - 900 (CM), 400 (CD), 0-300 (0 to 3 C's),
                         #            or 500-800 (D, followed by 0 to 3 C's)
@@ -49,20 +38,19 @@ roman_numeral_pattern = re.compile(
                         #        or 50-80 (L, followed by 0 to 3 X's)
     (IX|IV|V?I{0,3})    # ones - 9 (IX), 4 (IV), 0-3 (0 to 3 I's),
                         #        or 5-8 (V, followed by 0 to 3 I's)
-    $                   # end of string
     """,
     re.VERBOSE,
 )
 
 
-def to_roman(n):
+def roman(n):
     """Convert integer to Roman numeral"""
     try:
         n = int(n)
     except ValueError:
-        raise NotIntegerError("Non-integers cannot be converted")
+        return n
     if not (0 < n < 4000):
-        raise OutOfRangeError("Number is out of range. Number must be from 1 to 3999.")
+        return n
 
     result = ""
     for numeral, integer in roman_numeral_map:
@@ -72,13 +60,10 @@ def to_roman(n):
     return result
 
 
-def from_roman(s):
+def arabic(s):
     """Convert Roman numeral to integer"""
-    if not isinstance(s, str):
-        raise InvalidRomanNumeralError("Input must be a string")
-    if not roman_numeral_pattern.search(s):
-        raise InvalidRomanNumeralError("Invalid Roman numeral: %s" % s)
-
+    if not s:
+        return s
     result = 0
     index = 0
     for numeral, integer in roman_numeral_map:

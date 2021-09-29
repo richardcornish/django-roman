@@ -1,43 +1,45 @@
+import re
+
 from django import template
 from django.template.defaultfilters import stringfilter
+from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 
-from ..utils.roman import from_roman as _from_roman, to_roman as _to_roman
+from ..utils.roman import (
+    arabic as _arabic,
+    arabic_pattern,
+    roman as _roman,
+    roman_pattern,
+)
 
 register = template.Library()
 
 
-@register.filter(name="to_roman", is_safe=True)
+def roman_repl(match_obj):
+    if match_obj and match_obj.group():
+        html = '<span class="numerals numerals-roman">%s</span>'
+        return html % _roman(match_obj.group())
+    return ""
+
+
+def arabic_repl(match_obj):
+    if match_obj and match_obj.group():
+        html = '<span class="numerals numerals-arabic">%s</span>'
+        return html % _arabic(match_obj.group())
+    return ""
+
+
+@register.filter(name="roman", is_safe=True, needs_autoescape=True)
 @stringfilter
-def to_roman_filter(value):
-    return mark_safe(_to_roman(value))
+def roman_filter(value, autoescape=True):
+    if autoescape:
+        value = conditional_escape(value)
+    return mark_safe(arabic_pattern.sub(roman_repl, value))
 
 
-@register.filter(name="from_roman", is_safe=True)
+@register.filter(name="arabic", is_safe=True, needs_autoescape=True)
 @stringfilter
-def from_roman_filter(value):
-    return mark_safe(_from_roman(value))
-
-
-class RomanNode(template.Node):
-    def __init__(self, nodelist, func):
-        self.nodelist = nodelist
-        self.func = func
-
-    def render(self, context):
-        output = self.nodelist.render(context)
-        return mark_safe(self.func(output))
-
-
-@register.tag(name="to_roman")
-def to_roman_tag(parser, token):
-    nodelist = parser.parse(("endto_roman",))
-    parser.delete_first_token()
-    return RomanNode(nodelist, _to_roman)
-
-
-@register.tag(name="from_roman")
-def to_roman_tag(parser, token):
-    nodelist = parser.parse(("endfrom_roman",))
-    parser.delete_first_token()
-    return RomanNode(nodelist, _from_roman)
+def arabic_filter(value, autoescape=True):
+    if autoescape:
+        value = conditional_escape(value)
+    return mark_safe(roman_pattern.sub(arabic_repl, value))
