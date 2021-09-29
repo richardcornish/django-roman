@@ -1,36 +1,43 @@
 from django import template
+from django.template.defaultfilters import stringfilter
+from django.utils.safestring import mark_safe
 
+from ..utils.roman import from_roman as _from_roman, to_roman as _to_roman
 
 register = template.Library()
 
-numerals_set = (
-    (1000, 'M'),
-    (900, 'CM'),
-    (500, 'D'),
-    (400, 'CD'),
-    (100, 'C'),
-    (90, 'XC'),
-    (50, 'L'),
-    (40, 'XL'),
-    (10, 'X'),
-    (9, 'IX'),
-    (5, 'V'),
-    (4, 'IV'),
-    (1, 'I'),
-)
 
-@register.filter(is_safe=True)
-@register.simple_tag
-def roman(value):
-    try:
-        n = int(value)
-    except ValueError:
-        return value
-    if 0 < n < 4000:
-        result = ''
-        for integer, numeral in numerals_set:
-            while n >= integer:
-                result += numeral
-                n -= integer
-        return result
-    return n
+@register.filter(name="to_roman", is_safe=True)
+@stringfilter
+def to_roman_filter(value):
+    return mark_safe(_to_roman(value))
+
+
+@register.filter(name="from_roman", is_safe=True)
+@stringfilter
+def from_roman_filter(value):
+    return mark_safe(_from_roman(value))
+
+
+class RomanNode(template.Node):
+    def __init__(self, nodelist, func):
+        self.nodelist = nodelist
+        self.func = func
+
+    def render(self, context):
+        output = self.nodelist.render(context)
+        return mark_safe(self.func(output))
+
+
+@register.tag(name="to_roman")
+def to_roman_tag(parser, token):
+    nodelist = parser.parse(("endto_roman",))
+    parser.delete_first_token()
+    return RomanNode(nodelist, _to_roman)
+
+
+@register.tag(name="from_roman")
+def to_roman_tag(parser, token):
+    nodelist = parser.parse(("endfrom_roman",))
+    parser.delete_first_token()
+    return RomanNode(nodelist, _from_roman)

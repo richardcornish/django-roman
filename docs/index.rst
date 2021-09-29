@@ -1,3 +1,6 @@
+.. _index:
+.. module:: roman
+
 Django Roman
 ************
 
@@ -56,3 +59,22 @@ Result:
 .. code-block:: html
 
    Party like it's MCMXCIX.
+
+Contents
+========
+
+.. toctree::
+   :maxdepth: 2
+
+   install
+   usage
+   documentation
+   tests
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
