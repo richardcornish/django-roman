@@ -5,7 +5,7 @@ from django.template.defaultfilters import stringfilter
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 
-from ..utils.roman import (
+from ..roman import (
     arabic as _arabic,
     arabic_pattern,
     roman as _roman,

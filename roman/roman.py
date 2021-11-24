@@ -51,7 +51,6 @@ def roman(n):
         return n
     if not (0 < n < 4000):
         return n
-
     result = ""
     for numeral, integer in roman_numeral_map:
         while n >= integer:
