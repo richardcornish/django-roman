@@ -4,7 +4,7 @@
 Django Roman
 ************
 
-|PyPI version|_ |Build status|_
+|PyPI version|_ |Build status|_ |Documentation status|_
 
 .. |PyPI version| image::
    https://badge.fury.io/py/django-roman.svg
@@ -13,6 +13,10 @@ Django Roman
 .. |Build status| image::
    https://api.travis-ci.com/richardcornish/django-roman.svg?branch=main
 .. _Build status: https://app.travis-ci.com/github/richardcornish/django-roman
+
+.. |Documentation status| image::
+   https://readthedocs.org/projects/django-roman/badge/?version=latest
+.. _Documentation status: https://django-roman.readthedocs.io/en/latest/?badge=latest
 
 **Django Roman** is a `Django <https://www.djangoproject.com/>`_ `template tag <https://docs.djangoproject.com/en/dev/howto/custom-template-tags/>`_ application to convert `Arabic numerals <https://en.wikipedia.org/wiki/Arabic_numerals>`_ into `Roman numerals <https://en.wikipedia.org/wiki/Roman_numerals>`_.
 
