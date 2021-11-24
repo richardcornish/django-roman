@@ -17,7 +17,7 @@ Django Roman
 
 **Django Roman** is a `Django <https://www.djangoproject.com/>`_ `template tag <https://docs.djangoproject.com/en/dev/howto/custom-template-tags/>`_ application to convert `Arabic numerals <https://en.wikipedia.org/wiki/Arabic_numerals>`_ into `Roman numerals <https://en.wikipedia.org/wiki/Roman_numerals>`_.
 
-Original Roman numeral conversion code `adapted <https://diveintopython3.net/refactoring.html>`_ from `Dive Into Python 3 <https://diveintopython3.net/>`_ by Mark Pilgrim.
+Original Roman numeral conversion code `adapted <https://diveintopython3.net/unit-testing.html>`_ from `Dive Into Python 3 <https://diveintopython3.net/>`_ by Mark Pilgrim.
 
 * `Package <https://pypi.org/project/django-roman/>`_
 * `Source <https://github.com/richardcornish/django-roman>`_
