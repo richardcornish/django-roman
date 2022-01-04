@@ -56,7 +56,7 @@ class RomanTestCase(TestCase):
         out = Template(
             "{% load roman_tags %}" "{% filter roman %}{% now 'Y' %}{% endfilter %}."
         ).render(Context())
-        self.assertEqual(out, '<span class="numerals numerals-roman">MMXXI</span>.')
+        self.assertEqual(out, '<span class="numerals numerals-roman">MMXXII</span>.')
 
     def test_arabic_text(self):
         out = Template("{% load roman_tags %}" "{{ 'MCMXCIX'|arabic }}").render(
